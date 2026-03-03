@@ -997,6 +997,14 @@ body::before {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+
+.gal-item img {
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+.gal-item img.loaded {
+  opacity: 1;
+}
 </style>
 </head>
 <body>
@@ -1071,16 +1079,16 @@ body::before {
   <div class="section-tag" style="margin-bottom:40px;">Portraits</div>
   <div class="gallery-grid">
     <div class="gal-item">
-      <img src="images\1.png" alt="Suit portrait" loading="lazy">
+      <img src="images\1.webp" alt="Suit portrait" decoding="async">
     </div>
     <div class="gal-item">
-      <img src="images\2.png" alt="B & W Portrait" loading="lazy">
+      <img src="images\2.webp" alt="B & W Portrait" loading="lazy" decoding="async">
     </div>
     <div class="gal-item">
-      <img src="images\3.png" alt="Candid Laughter" loading="lazy">
+      <img src="images\3.webp" alt="Candid Laughter" loading="lazy" decoding="async">
     </div>
     <div class="gal-item">
-      <img src="images\4.png" alt="Champagne Toast" loading="lazy">
+      <img src="images\4.webp" alt="Champagne Toast" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -1372,6 +1380,14 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
       target.scrollIntoView({behavior:'smooth', block:'start'});
     }
   });
+});
+
+document.querySelectorAll('.gal-item img').forEach(function(img){
+  if(img.complete){
+    img.classList.add('loaded');
+  } else {
+    img.addEventListener('load', function(){ img.classList.add('loaded'); });
+  }
 });
 </script>
 </body>
